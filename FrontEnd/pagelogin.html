@@ -11,6 +11,7 @@
         rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/stylelogin.css">
 </head>
 
 <body>
@@ -28,9 +29,23 @@
         </nav>
     </header>
     <main>
-        <section id="login">
-
-        </section>
+        <div class="container">
+            <div class="login-box">
+                <h2>Login</h2>
+                <form>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="submit-container">
+                        <input type="submit" value="Envoyer">
+                    </div>
+                </form>
+                <a>
+                    <p>Mot de passe oublié</p>
+                </a>
+            </div>
+        </div>
     </main>
 
     <footer>
