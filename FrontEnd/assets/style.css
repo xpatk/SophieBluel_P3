@@ -293,3 +293,7 @@ added code for the filters section
   background-color: #1d6154;
   color: white;
 }
+
+a {
+  text-decoration: none;
+}
