@@ -1,36 +1,47 @@
+/*****************
+ 
+ Logging in 
+
+*****************/
 function listenerSubmit() {
+  // add event listenet to the form
   const formLogin = document.querySelector(".form-login");
-  formLogin.addEventListener("submit", function (event) {
+  formLogin.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Creation of the object loginUser containing the data needed
+    // creating a constant with all the data of the user needed
     const loginUser = {
       email: event.target.querySelector("[name=email]").value,
       password: event.target.querySelector("[name=password]").value,
     };
-    // Json conversion
+
     const dataLogin = JSON.stringify(loginUser);
 
-    // fetch POST to users/login
-    fetch("http://localhost:5678/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: dataLogin,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Unable to fetch data : ${response.status}");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+    try {
+      // "try" to log in - posting/sending the data of the user
+      const response = await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: dataLogin,
       });
+
+      // errow handling
+      if (!response.ok) {
+        throw new Error(`Unable to fetch data: ${response.status}`);
+      }
+
+      // if response is ok create a const token with the token from the server response
+      const data = await response.json();
+      // extract the token
+      const token = data.jwt;
+      // store the token in local storage
+      window.localStorage.setItem("authToken", token);
+      console.log("Success! Token:", token);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   });
 }
 

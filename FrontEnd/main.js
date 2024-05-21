@@ -1,3 +1,9 @@
+/*****************
+ 
+ Generating index.html gallery and filters 
+
+*****************/
+
 // DOM container for works
 const gallery = document.querySelector(".gallery");
 let works = [];
@@ -20,6 +26,7 @@ async function fetchWorks() {
 
 // function display works on the page
 function displayWorks(worksToDisplay) {
+  // empty the gallery first
   gallery.innerHTML = "";
 
   for (let i = 0; i < worksToDisplay.length; i++) {
@@ -39,13 +46,18 @@ function displayWorks(worksToDisplay) {
     // attach elements to the page
     figureElement.appendChild(imageElement);
     figureElement.appendChild(titleElement);
-
     gallery.appendChild(figureElement);
   }
 }
 
 // Call the function to fetch and display all of the works to begin with
 fetchWorks();
+
+/*****************
+ 
+Filters 
+
+*****************/
 
 // button to display all works
 const buttonTous = document.querySelector(".btn-tous");
