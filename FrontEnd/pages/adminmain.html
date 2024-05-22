@@ -50,7 +50,22 @@
             </article>
         </section>
         <section id="portfolio">
-            <h2>Mes Projets <i class="fa-regular fa-pen-to-square fa-2xs"><span>modifier</span></i></h2>
+
+            <!-- link to the modal -->
+            <h2>Mes Projets <a href="#modal1"><i
+                        class="fa-regular fa-pen-to-square fa-2xs"><span>modifier</span></i></a>
+            </h2>
+
+            <!-- The modal: HIDDEN unless clicked on "modifier" -->
+            <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="#titlemodal1"
+                style="display:none">
+                <!-- MODAL -->
+                <div class="modal-wrapper">
+                    <h1 id="titlemodal1">Galerie photo</h1>
+                    <!-- PHOTOS HERE -->
+                </div>
+            </aside>
+
             <div class="filtres">
                 <button class="btn-tous" type="button">Tous</button>
                 <button class="btn-objets" type="button">Objets</button>

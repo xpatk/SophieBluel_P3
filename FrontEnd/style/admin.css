@@ -1,6 +1,6 @@
 /****** 
 
-added code for the admin's mode 
+Code for admin's mode 
 
 ******/
 
@@ -27,4 +27,32 @@ added code for the admin's mode
   font-size: 12px;
   letter-spacing: 0.1em;
   margin-left: 8px;
+}
+
+/****** 
+
+MODAL
+
+******/
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-wrapper {
+  overflow: auto;
+  background-color: white;
+  width: 600px;
+  max-width: calc(100vh - 20px);
+  max-height: calc(100vh - 20px);
+  padding: 30px;
+  border-radius: 10px;
 }
