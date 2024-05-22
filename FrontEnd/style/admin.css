@@ -15,5 +15,16 @@ added code for the admin's mode
 }
 
 .fa-pen-to-square {
-  margin: 0 10px 0 10px;
+  margin: 0 20px 0 20px;
+}
+
+.fa-2xs {
+  color: black;
+}
+
+.fa-2xs > span {
+  font-family: "Work Sans";
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-left: 8px;
 }
