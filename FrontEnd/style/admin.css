@@ -1,0 +1,19 @@
+/****** 
+
+added code for the admin's mode 
+
+******/
+
+.edit {
+  color: white;
+  background-color: black;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-pen-to-square {
+  margin: 0 10px 0 10px;
+}

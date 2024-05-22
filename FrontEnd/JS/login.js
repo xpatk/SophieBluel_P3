@@ -50,7 +50,7 @@ function listenerSubmit() {
       window.localStorage.setItem("authToken", token);
 
       // redirection to the main page
-      window.location.href = "./index.html";
+      window.location.href = "../pages/adminmain.html";
       console.log("Success! Token:", token);
     } catch (error) {
       console.error("Error:", error);
