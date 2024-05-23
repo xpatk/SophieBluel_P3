@@ -89,3 +89,26 @@ buttonHotels.addEventListener("click", function () {
   );
   displayWorks(filteredWorks);
 });
+
+/*****************
+ 
+The modal  
+
+*****************/
+
+// function to open the modal - to be used in the listener
+const openModal = function (event) {
+  event.preventDefault();
+  const target = document.querySelector(event.target.getAttribute("href"));
+  // desactivate display: none
+  target.style.display = null;
+  // desactivate aria hidden
+  target.removeAttribute("aria-hidden");
+  // for assistive technologies - the element is modal
+  target.setAttribute("aria-modal", "true");
+};
+
+// event listener calling the function to open the modal on click
+document.querySelectorAll(".js-modal").forEach((a) => {
+  a.addEventListener("click", openModal);
+});
