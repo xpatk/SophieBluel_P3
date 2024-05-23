@@ -96,6 +96,9 @@ The modal
 
 *****************/
 
+// the variable checking which modal is open
+let modal = null;
+
 // function to open the modal - to be used in the listener
 const openModal = function (event) {
   event.preventDefault();
@@ -106,6 +109,35 @@ const openModal = function (event) {
   target.removeAttribute("aria-hidden");
   // for assistive technologies - the element is modal
   target.setAttribute("aria-modal", "true");
+  modal = target;
+  modal.addEventListener("click", closeModal);
+  modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
+  modal
+    .querySelector(".js-stop-propagation")
+    .addEventListener("click", stopPropagation);
+};
+
+// function to CLOSE the modal
+const closeModal = function (event) {
+  if (modal === null) return;
+  event.preventDefault();
+  // reactivate display: none
+  modal.style.display = "none";
+  // reactivate aria hidden
+  modal.setAttribute("aria-hidden", "true");
+  modal.removeAttribute("aria-modal");
+  modal.removeEventListener("click", closeModal);
+  modal
+    .querySelector(".js-close-modal")
+    .removeEventListener("click", closeModal);
+  modal
+    .querySelector(".js-stop-propagation")
+    .removeEventListener("click", stopPropagation);
+  modal = null;
+};
+
+const stopPropagation = function (event) {
+  event.stopPropagation();
 };
 
 // event listener calling the function to open the modal on click

@@ -8,6 +8,8 @@
 let errorElement = document.querySelector(".error");
 errorElement.style.display = "none";
 
+listenerSubmit();
+
 function listenerSubmit() {
   // add event listenet to the form
   const formLogin = document.querySelector(".form-login");
@@ -57,5 +59,3 @@ function listenerSubmit() {
     }
   });
 }
-
-listenerSubmit();

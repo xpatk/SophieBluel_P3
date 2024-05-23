@@ -56,3 +56,8 @@ MODAL
   padding: 30px;
   border-radius: 10px;
 }
+
+.close-container {
+  display: flex;
+  justify-content: flex-end;
+}
