@@ -47,12 +47,12 @@ function listenerSubmit() {
       // if response is ok create a const token with the token from the server response
       const data = await response.json();
       // extract the token
-      const token = data.jwt;
+      const token = data.token;
       // store the token in local storage
       window.localStorage.setItem("authToken", token);
 
       // redirection to the main page
-      window.location.href = "../pages/adminmain.html";
+      window.location.href = "../pages/index.html";
       console.log("Success! Token:", token);
     } catch (error) {
       console.error("Error:", error);

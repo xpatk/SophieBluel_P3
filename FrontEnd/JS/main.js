@@ -1,14 +1,62 @@
 /*****************
  
- Generating index.html gallery and filters 
+ Generating main page : filters and gallery of works 
 
 *****************/
 
-// DOM container for works
+// FILTERS (BUTTONS)
+const containerFilters = document.querySelector(".filtres");
+let filters = [];
+
+// fetch categories from API
+async function fetchCategories() {
+  try {
+    const response = await fetch("http://localhost:5678/api/categories");
+    if (!response.ok) {
+      throw new Error("Couldn't fetch categories");
+    }
+    //if response is ok
+    filters = await response.json();
+    // console.log(filters);
+    makeButtons(filters);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Use fetched categories to make button filters
+function makeButtons(filters) {
+  containerFilters.innerHTML = "";
+  filters.forEach(({ id, name }) => {
+    const button = document.createElement("button");
+    button.textContent = name;
+    button.addEventListener("click", () => {
+      filterCategories(id);
+    });
+    containerFilters.appendChild(button);
+  });
+  // Add the "all" button
+  const allButton = document.createElement("button");
+  allButton.textContent = "Tous";
+  allButton.addEventListener("click", () => {
+    // Call a function to display all elements
+    displayAllElements();
+  });
+  containerFilters.prepend(allButton);
+}
+
+// Function to display all elements
+function displayAllElements() {
+  displayWorks(works);
+}
+
+// GALLERY OF WORKS
+
+// DOM container for WORKS
 const gallery = document.querySelector(".gallery");
 let works = [];
 
-// function fetch data from API
+// function fetch works from API
 async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
@@ -24,7 +72,7 @@ async function fetchWorks() {
   }
 }
 
-// function display works on the page
+// function to display works on the page
 function displayWorks(worksToDisplay) {
   // empty the gallery first
   gallery.innerHTML = "";
@@ -50,45 +98,15 @@ function displayWorks(worksToDisplay) {
   }
 }
 
-// Call the function to fetch and display all of the works to begin with
+// CALL functions FETCH API
+fetchCategories();
 fetchWorks();
 
-/*****************
- 
-Filters 
-
-*****************/
-
-// button to display all works
-const buttonTous = document.querySelector(".btn-tous");
-buttonTous.addEventListener("click", function () {
-  displayWorks(works);
-});
-
-// button to display objects
-const buttonObjects = document.querySelector(".btn-objets");
-buttonObjects.addEventListener("click", function () {
-  const filteredWorks = works.filter((work) => work.category.name === "Objets");
+// Filter WORKS by ID
+function filterCategories(categoryId) {
+  const filteredWorks = works.filter((work) => work.categoryId === categoryId);
   displayWorks(filteredWorks);
-});
-
-// button to display apartments
-const buttonApartments = document.querySelector(".btn-appartements");
-buttonApartments.addEventListener("click", function () {
-  const filteredWorks = works.filter(
-    (work) => work.category.name === "Appartements"
-  );
-  displayWorks(filteredWorks);
-});
-
-// button to display hotels and restaurants
-const buttonHotels = document.querySelector(".btn-hotels-restaurants");
-buttonHotels.addEventListener("click", function () {
-  const filteredWorks = works.filter(
-    (work) => work.category.name === "Hotels & restaurants"
-  );
-  displayWorks(filteredWorks);
-});
+}
 
 /*****************
  
