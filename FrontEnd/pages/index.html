@@ -25,7 +25,7 @@
 				<li>projets</li>
 				<li>contact</li>
 				<a href="./pagelogin.html">
-					<li>login</li>
+					<li class="link-login">login</li>
 				</a>
 				<li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
@@ -54,12 +54,37 @@
 			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="#titlemodal1"
 				style="display:none">
 				<!-- MODAL -->
-				<div class="modal-wrapper">
-					<div class="close-container js-stop-propagation">
-						<i class="fa-solid fa-x" class="js-close-modal"></i>
+				<div class="modal-wrapper js-stop-propagation">
+					<div class="close-container">
+						<i class="fa-solid fa-x js-close-modal"></i>
 					</div>
-					<h1 id="titlemodal1">Galerie photo</h1>
-					<!-- PHOTOS HERE -->
+					<h1 class="titlemodal1">Galerie photo</h1>
+					<section class="modalPhotos">
+						<!-- Photos here -->
+					</section>
+					<section class="modalAddPhoto" style="display:none">
+						<form id="addPhotoForm">
+							<div class="input-group">
+								<label for="photo">Photo:</label>
+								<input type="file" id="photo" name="photo" accept="image/*" required>
+							</div>
+							<div class="input-group">
+								<label for="title">Titre:</label>
+								<input type="text" id="title" name="title" required>
+							</div>
+							<div class="input-group">
+								<label for="category">Catégorie:</label>
+								<select id="category" name="category" required>
+									<!-- categories added dynamically -->
+								</select>
+							</div>
+							<button type="submit">Valider</button>
+						</form>
+					</section>
+					<hr>
+					<section class="buttonModalSection">
+						<button class="btnModal">Ajouter une photo</button>
+					</section>
 				</div>
 			</aside>
 

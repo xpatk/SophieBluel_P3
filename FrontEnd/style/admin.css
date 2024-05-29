@@ -55,9 +55,63 @@ MODAL
   max-height: calc(100vh - 20px);
   padding: 30px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.modalPhotos {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 20px;
+}
+
+.titlemodal1 {
+  font-family: "Work Sans";
+  color: black;
+  font-size: 26px;
+  text-align: center;
 }
 
 .close-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.figure-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.figure-wrapper img {
+  width: 100%;
+}
+
+.delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 26px;
+  height: 26px;
+  background-color: black;
+  border: none;
+  cursor: pointer;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete .fa-trash-can {
+  font-size: 14px;
+  color: white;
+}
+
+hr {
+  margin-bottom: 10px;
+  width: 80%;
 }

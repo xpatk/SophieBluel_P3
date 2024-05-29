@@ -1,5 +1,53 @@
 /*****************
  
+ Check if admin mode 
+
+*****************/
+
+document.addEventListener("DOMContentLoaded", () => {
+  // check if token is present in localStorage
+  const token = window.localStorage.getItem("authToken");
+
+  // DOM elements
+  const editBand = document.querySelector(".edit");
+  const linkOpenModal = document.querySelector(".js-modal");
+  const linkLogin = document.querySelector(".link-login");
+  const filtres = document.querySelector(".filtres");
+
+  if (token) {
+    console.log("Admin is logged in");
+    //modify the elements - show elements on the page, delete filters
+    if (editBand) {
+      editBand.style.display = "flex";
+    }
+    if (linkOpenModal) {
+      linkOpenModal.style.display = "inline-block";
+    }
+    if (linkLogin) {
+      linkLogin.innerText = "Logout";
+
+      linkLogin.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.localStorage.removeItem("authToken");
+        window.location.href = "index.html";
+      });
+    }
+    if (filtres) {
+      filtres.style.display = "none";
+    } else {
+      console.log("Admin layout applied");
+    }
+  } else {
+    console.log("Public access");
+    //load normal page
+  }
+});
+
+fetchCategories();
+fetchWorks();
+
+/*****************
+ 
  Generating main page : filters and gallery of works 
 
 *****************/
@@ -67,6 +115,7 @@ async function fetchWorks() {
     // if response is ok call function displayWorks
     works = await response.json();
     displayWorks(works);
+    console.log(works);
   } catch (error) {
     console.error(error);
   }
@@ -98,7 +147,7 @@ function displayWorks(worksToDisplay) {
   }
 }
 
-// CALL functions FETCH API
+// CALL functions FETCH API categories and works
 fetchCategories();
 fetchWorks();
 
@@ -133,7 +182,34 @@ const openModal = function (event) {
   modal
     .querySelector(".js-stop-propagation")
     .addEventListener("click", stopPropagation);
+  displayContentModal(works);
+  document.querySelector(".btnModal").addEventListener("click", () => {
+    document.querySelector(".modalPhotos").style.display = "none";
+    document.querySelector(".modalAddPhoto").style.display = "block";
+    populateCategoryOptions();
+  });
 };
+
+// fetch and add categories to the form addPhotoForm
+async function populateCategoryOptions() {
+  try {
+    const response = await fetch("http://localhost:5678/api/categories");
+    if (!response.ok) {
+      throw new Error("Couldn't fetch categories");
+    }
+    const categories = await response.json();
+    const categorySelect = document.getElementById("category");
+    categorySelect.innerHTML = "";
+    categories.forEach((category) => {
+      const option = document.createElement("option");
+      option.value = category.id;
+      option.textContent = category.name;
+      categorySelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // function to CLOSE the modal
 const closeModal = function (event) {
@@ -162,3 +238,74 @@ const stopPropagation = function (event) {
 document.querySelectorAll(".js-modal").forEach((a) => {
   a.addEventListener("click", openModal);
 });
+
+function displayContentModal(worksToDisplay) {
+  // Ensure modalPhotos is correctly defined
+  const modalPhotos = document.querySelector(".modalPhotos");
+  if (!modalPhotos) {
+    console.error("Modal photos container not found");
+    return;
+  }
+  // Empty the gallery first
+  modalPhotos.innerHTML = "";
+
+  for (let i = 0; i < worksToDisplay.length; i++) {
+    const work = worksToDisplay[i];
+
+    // Create image element
+
+    const figureElement = document.createElement("figure");
+    figureElement.classList.add("figure-wrapper");
+
+    const imageElement = document.createElement("img");
+    imageElement.src = work.imageUrl;
+
+    const deleteElement = document.createElement("button");
+    deleteElement.classList.add("delete");
+
+    const iconElement = document.createElement("i");
+    iconElement.classList.add("fa-solid", "fa-trash-can");
+
+    // Attach elements to the page
+    deleteElement.appendChild(iconElement);
+    figureElement.appendChild(imageElement);
+    figureElement.appendChild(deleteElement);
+
+    // Append the container to modal
+    modalPhotos.appendChild(figureElement);
+
+    // Add event listener to the delete button
+    deleteElement.addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        const response = await fetch(
+          `http://localhost:5678/api/works/${work.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${window.localStorage.getItem(
+                "authToken"
+              )}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Couldn't delete the work");
+        }
+
+        // Remove the figure element from the modal and page
+        figureElement.remove();
+        // Remove the work from the global works array
+        works = works.filter((w) => w.id !== work.id);
+
+        // Re-render the main page gallery
+        displayWorks(works);
+        console.log(`Work with id ${work.id} deleted`);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }
+}

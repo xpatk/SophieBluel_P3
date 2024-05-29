@@ -266,7 +266,7 @@ footer nav ul {
 
 /****** 
 
-added code for the filters section 
+added code for the filters section and buttons
 
 ******/
 
@@ -277,7 +277,8 @@ added code for the filters section
   padding: 30px 0 50px 0;
 }
 
-.filtres button {
+.filtres button,
+.btnModal {
   margin-right: 15px;
   padding: 7px 12px;
   border-radius: 36px;
@@ -289,7 +290,8 @@ added code for the filters section
   color: #1d6154;
 }
 
-.filtres button:hover {
+.filtres button:hover,
+.btnModal:hover {
   background-color: #1d6154;
   color: white;
 }
