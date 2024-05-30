@@ -278,7 +278,8 @@ added code for the filters section and buttons
 }
 
 .filtres button,
-.btnModal {
+.btnModal,
+.validate {
   margin-right: 15px;
   padding: 7px 12px;
   border-radius: 36px;
@@ -291,7 +292,8 @@ added code for the filters section and buttons
 }
 
 .filtres button:hover,
-.btnModal:hover {
+.btnModal:hover,
+.validate:hover {
   background-color: #1d6154;
   color: white;
 }

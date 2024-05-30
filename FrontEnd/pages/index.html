@@ -63,10 +63,10 @@
 						<!-- Photos here -->
 					</section>
 					<section class="modalAddPhoto" style="display:none">
-						<form id="addPhotoForm">
+						<form class="addPhotoForm" enctype="multipart/form-data" method="post">
 							<div class="input-group">
-								<label for="photo">Photo:</label>
-								<input type="file" id="photo" name="photo" accept="image/*" required>
+								<label for="image">Photo:</label>
+								<input type="file" id="image" name="image" accept="image/*" required>
 							</div>
 							<div class="input-group">
 								<label for="title">Titre:</label>
@@ -78,13 +78,14 @@
 									<!-- categories added dynamically -->
 								</select>
 							</div>
-							<button type="submit">Valider</button>
+							<hr>
+							<button type="submit" class="validate">Valider</button>
 						</form>
 					</section>
-					<hr>
-					<section class="buttonModalSection">
+					<div class="bottomModal">
+						<hr>
 						<button class="btnModal">Ajouter une photo</button>
-					</section>
+					</div>
 				</div>
 			</aside>
 

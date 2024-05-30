@@ -148,8 +148,8 @@ function displayWorks(worksToDisplay) {
 }
 
 // CALL functions FETCH API categories and works
-fetchCategories();
-fetchWorks();
+// fetchCategories();
+// fetchWorks();
 
 // Filter WORKS by ID
 function filterCategories(categoryId) {
@@ -177,15 +177,20 @@ const openModal = function (event) {
   // for assistive technologies - the element is modal
   target.setAttribute("aria-modal", "true");
   modal = target;
+  document.querySelector(".addPhotoForm").style.display = "none";
   modal.addEventListener("click", closeModal);
   modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
   modal
     .querySelector(".js-stop-propagation")
     .addEventListener("click", stopPropagation);
   displayContentModal(works);
+  document.querySelector(".bottomModal").style.display = "block";
+  document.querySelector(".btnModal").style.display = "block";
   document.querySelector(".btnModal").addEventListener("click", () => {
     document.querySelector(".modalPhotos").style.display = "none";
     document.querySelector(".modalAddPhoto").style.display = "block";
+    document.querySelector(".addPhotoForm").style.display = "flex";
+    document.querySelector(".bottomModal").style.display = "none";
     populateCategoryOptions();
   });
 };
@@ -210,6 +215,10 @@ async function populateCategoryOptions() {
     console.error(error);
   }
 }
+
+document.querySelector(".btnModal").addEventListener("click", () => {
+  populateCategoryOptions();
+});
 
 // function to CLOSE the modal
 const closeModal = function (event) {
@@ -308,4 +317,115 @@ function displayContentModal(worksToDisplay) {
       }
     });
   }
+}
+
+/*****************
+ 
+Add pictures to the gallery - modal  
+
+*****************/
+
+const form = document.querySelector(".addPhotoForm");
+const modalPhotos = document.querySelector(".modalPhotos");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  console.log(form);
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      body: formData,
+      headers: {
+        // "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
+      },
+    });
+    if (response.ok) {
+      const newWork = await response.json();
+      addPhotoToGallery(newWork);
+      addPhotoToModal(newWork);
+      form.reset();
+      console.log("Photo uploaded successfully");
+    } else {
+      console.log(`Failed to upload image: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+function addPhotoToGallery(work) {
+  // create image element
+  const imageElement = document.createElement("img");
+  imageElement.src = work.imageUrl;
+
+  //create title element
+  const titleElement = document.createElement("figcaption");
+  titleElement.innerText = work.title;
+
+  //create figure element
+  const figureElement = document.createElement("figure");
+
+  // attach elements to the page
+  figureElement.appendChild(imageElement);
+  figureElement.appendChild(titleElement);
+  gallery.appendChild(figureElement);
+}
+
+function addPhotoToModal(work) {
+  const figureElement = document.createElement("figure");
+  figureElement.classList.add("figure-wrapper");
+
+  const imageElement = document.createElement("img");
+  imageElement.src = work.imageUrl;
+
+  const deleteElement = document.createElement("button");
+  deleteElement.classList.add("delete");
+
+  const iconElement = document.createElement("i");
+  iconElement.classList.add("fa-solid", "fa-trash-can");
+
+  // Attach elements to the page
+  deleteElement.appendChild(iconElement);
+  figureElement.appendChild(imageElement);
+  figureElement.appendChild(deleteElement);
+
+  // Append the container to modal
+  modalPhotos.appendChild(figureElement);
+
+  // Add delete functionality
+  deleteElement.addEventListener("click", async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:5678/api/works/${work.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Couldn't delete the work");
+      }
+
+      // Remove the figure element from the modal and page
+      figureElement.remove();
+      // Remove the work from the global works array
+      works = works.filter((w) => w.id !== work.id);
+
+      // Re-render the main page gallery
+      displayWorks(works);
+      console.log(`Work with id ${work.id} deleted`);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 }

@@ -112,6 +112,12 @@ MODAL
 }
 
 hr {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: 80%;
+}
+
+.addPhotoForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
