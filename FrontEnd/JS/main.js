@@ -47,10 +47,10 @@ fetchCategories();
 fetchWorks();
 
 /*****************
- 
- Generating main page : filters and gallery of works 
-
-*****************/
+   
+   Generating main page : filters and gallery of works 
+  
+  *****************/
 
 // FILTERS (BUTTONS)
 const containerFilters = document.querySelector(".filtres");
@@ -158,10 +158,10 @@ function filterCategories(categoryId) {
 }
 
 /*****************
- 
-The modal  
-
-*****************/
+   
+  The modal  
+  
+  *****************/
 
 // the variable checking which modal is open
 let modal = null;
@@ -177,6 +177,8 @@ const openModal = function (event) {
   // for assistive technologies - the element is modal
   target.setAttribute("aria-modal", "true");
   modal = target;
+  document.querySelector(".titlemodal1").innerText = "";
+  document.querySelector(".titlemodal1").innerText = "Galerie photo";
   document.querySelector(".addPhotoForm").style.display = "none";
   modal.addEventListener("click", closeModal);
   modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
@@ -189,8 +191,10 @@ const openModal = function (event) {
   document.querySelector(".btnModal").addEventListener("click", () => {
     document.querySelector(".modalPhotos").style.display = "none";
     document.querySelector(".modalAddPhoto").style.display = "block";
+    document.querySelector(".titlemodal1").innerText = "Ajout photo";
     document.querySelector(".addPhotoForm").style.display = "flex";
     document.querySelector(".bottomModal").style.display = "none";
+    document.querySelector(".go-back").style.display = "inline-block";
     populateCategoryOptions();
   });
 };
@@ -320,10 +324,10 @@ function displayContentModal(worksToDisplay) {
 }
 
 /*****************
- 
-Add pictures to the gallery - modal  
-
-*****************/
+   
+  Add pictures to the gallery - modal  
+  
+  *****************/
 
 const form = document.querySelector(".addPhotoForm");
 const modalPhotos = document.querySelector(".modalPhotos");
@@ -429,3 +433,5 @@ function addPhotoToModal(work) {
     }
   });
 }
+
+// go back listener

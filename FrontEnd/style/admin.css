@@ -83,6 +83,12 @@ MODAL
   right: 20px;
 }
 
+.go-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
 .figure-wrapper {
   position: relative;
   width: 100%;

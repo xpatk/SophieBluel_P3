@@ -58,13 +58,16 @@
 					<div class="close-container">
 						<i class="fa-solid fa-x js-close-modal"></i>
 					</div>
-					<h1 class="titlemodal1">Galerie photo</h1>
+					<div class="go-back" style="display:none">
+						<i class="fa-solid fa-arrow-left fa-lg"></i>
+					</div>
+					<h1 class="titlemodal1"></h1>
 					<section class="modalPhotos">
 						<!-- Photos here -->
 					</section>
 					<section class="modalAddPhoto" style="display:none">
 						<form class="addPhotoForm" enctype="multipart/form-data" method="post">
-							<div class="input-group">
+							<div class="input-photo">
 								<label for="image">Photo:</label>
 								<input type="file" id="image" name="image" accept="image/*" required>
 							</div>
