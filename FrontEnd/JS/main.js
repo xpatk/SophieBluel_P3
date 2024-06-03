@@ -169,13 +169,9 @@ let modal = null;
 // function to open the modal - to be used in the listener
 const openModal = function (event) {
   event.preventDefault();
-  const target = document.querySelector(event.target.getAttribute("href"));
+  const target = document.querySelector("#modal1");
   // desactivate display: none
   target.style.display = null;
-  // desactivate aria hidden
-  target.removeAttribute("aria-hidden");
-  // for assistive technologies - the element is modal
-  target.setAttribute("aria-modal", "true");
   modal = target;
   document.querySelector(".titlemodal1").innerText = "";
   document.querySelector(".titlemodal1").innerText = "Galerie photo";
@@ -230,9 +226,6 @@ const closeModal = function (event) {
   event.preventDefault();
   // reactivate display: none
   modal.style.display = "none";
-  // reactivate aria hidden
-  modal.setAttribute("aria-hidden", "true");
-  modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
   modal
     .querySelector(".js-close-modal")
@@ -327,7 +320,7 @@ function displayContentModal(worksToDisplay) {
    
   Add pictures to the gallery - modal  
   
-  *****************/
+*****************/
 
 const form = document.querySelector(".addPhotoForm");
 const modalPhotos = document.querySelector(".modalPhotos");
