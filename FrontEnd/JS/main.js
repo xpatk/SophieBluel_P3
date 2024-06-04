@@ -147,14 +147,12 @@ function displayWorks(worksToDisplay) {
   }
 }
 
-// CALL functions FETCH API categories and works
-// fetchCategories();
-// fetchWorks();
-
 // Filter WORKS by ID
+let categories;
+
 function filterCategories(categoryId) {
-  const filteredWorks = works.filter((work) => work.categoryId === categoryId);
-  displayWorks(filteredWorks);
+  categories = works.filter((work) => work.categoryId === categoryId);
+  displayWorks(categories);
 }
 
 /*****************
@@ -173,9 +171,11 @@ const openModal = function (event) {
   // desactivate display: none
   target.style.display = null;
   modal = target;
+  populateCategoryOptions();
   document.querySelector(".titlemodal1").innerText = "";
   document.querySelector(".titlemodal1").innerText = "Galerie photo";
   document.querySelector(".addPhotoForm").style.display = "none";
+  document.querySelector(".modalPhotos").style.display = "grid";
   modal.addEventListener("click", closeModal);
   modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
   modal
@@ -191,28 +191,22 @@ const openModal = function (event) {
     document.querySelector(".addPhotoForm").style.display = "flex";
     document.querySelector(".bottomModal").style.display = "none";
     document.querySelector(".go-back").style.display = "inline-block";
-    populateCategoryOptions();
   });
 };
 
 // fetch and add categories to the form addPhotoForm
-async function populateCategoryOptions() {
+function populateCategoryOptions() {
   try {
-    const response = await fetch("http://localhost:5678/api/categories");
-    if (!response.ok) {
-      throw new Error("Couldn't fetch categories");
-    }
-    const categories = await response.json();
     const categorySelect = document.getElementById("category");
     categorySelect.innerHTML = "";
-    categories.forEach((category) => {
+    filters.forEach((category) => {
       const option = document.createElement("option");
       option.value = category.id;
       option.textContent = category.name;
       categorySelect.appendChild(option);
     });
   } catch (error) {
-    console.error(error);
+    console.error("Couldn't populate categories", error);
   }
 }
 
@@ -356,21 +350,7 @@ form.addEventListener("submit", async (event) => {
 });
 
 function addPhotoToGallery(work) {
-  // create image element
-  const imageElement = document.createElement("img");
-  imageElement.src = work.imageUrl;
-
-  //create title element
-  const titleElement = document.createElement("figcaption");
-  titleElement.innerText = work.title;
-
-  //create figure element
-  const figureElement = document.createElement("figure");
-
-  // attach elements to the page
-  figureElement.appendChild(imageElement);
-  figureElement.appendChild(titleElement);
-  gallery.appendChild(figureElement);
+  fetchWorks();
 }
 
 function addPhotoToModal(work) {
@@ -412,7 +392,6 @@ function addPhotoToModal(work) {
       if (!response.ok) {
         throw new Error("Couldn't delete the work");
       }
-
       // Remove the figure element from the modal and page
       figureElement.remove();
       // Remove the work from the global works array
@@ -428,3 +407,14 @@ function addPhotoToModal(work) {
 }
 
 // go back listener
+let arrowLeft = document.querySelector(".go-back");
+arrowLeft.addEventListener("click", (e) => {
+  // console.log("clicked");
+  e.preventDefault();
+  document.querySelector(".titlemodal1").innerText = "";
+  document.querySelector(".titlemodal1").innerText = "Galerie photo";
+  document.querySelector(".addPhotoForm").style.display = "none";
+  document.querySelector(".modalPhotos").style.display = "grid";
+  displayContentModal(works);
+  document.querySelector(".bottomModal").style.display = "block";
+});
