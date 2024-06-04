@@ -47,6 +47,11 @@ MODAL
   justify-content: center;
 }
 
+section {
+  width: 100%;
+  text-align: center;
+}
+
 .modal-wrapper {
   overflow: auto;
   background-color: white;
@@ -66,8 +71,8 @@ MODAL
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
-  grid-row-gap: 20px;
-  margin-bottom: 0px;
+  grid-row-gap: 10px;
+  margin-bottom: 0;
 }
 
 .titlemodal1 {
@@ -118,8 +123,8 @@ MODAL
 }
 
 hr {
-  margin-bottom: 20px;
-  width: 90%;
+  margin-bottom: 40px;
+  width: 100%;
 }
 
 /****** 
@@ -129,7 +134,7 @@ Add photo modal
 ******/
 
 .modalAddPhoto {
-  width: 70%;
+  width: 80%;
 }
 
 .addPhotoForm {
@@ -177,7 +182,7 @@ Add photo modal
 
 .input-group {
   width: 100%;
-  margin: 15px 0 15px 0;
+  margin: 15px 0 40px 0;
 }
 
 .input-field,
@@ -195,6 +200,19 @@ select {
 }
 
 .bottomModal {
-  width: 90%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.submitFormBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.validate {
+  width: 50%;
 }

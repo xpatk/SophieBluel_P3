@@ -182,11 +182,11 @@ const openModal = function (event) {
     .querySelector(".js-stop-propagation")
     .addEventListener("click", stopPropagation);
   displayContentModal(works);
-  document.querySelector(".bottomModal").style.display = "block";
-  document.querySelector(".btnModal").style.display = "block";
+  document.querySelector(".bottomModal").style.display = "flex";
+  document.querySelector(".btnModal").style.display = "flex";
   document.querySelector(".btnModal").addEventListener("click", () => {
     document.querySelector(".modalPhotos").style.display = "none";
-    document.querySelector(".modalAddPhoto").style.display = "block";
+    document.querySelector(".modalAddPhoto").style.display = "grid";
     document.querySelector(".titlemodal1").innerText = "Ajout photo";
     document.querySelector(".addPhotoForm").style.display = "flex";
     document.querySelector(".bottomModal").style.display = "none";
@@ -416,5 +416,5 @@ arrowLeft.addEventListener("click", (e) => {
   document.querySelector(".addPhotoForm").style.display = "none";
   document.querySelector(".modalPhotos").style.display = "grid";
   displayContentModal(works);
-  document.querySelector(".bottomModal").style.display = "block";
+  document.querySelector(".bottomModal").style.display = "flex";
 });
