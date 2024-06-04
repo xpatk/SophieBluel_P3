@@ -153,6 +153,7 @@ Add photo modal
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .fa-image {
@@ -177,7 +178,7 @@ Add photo modal
 
 .input-group {
   margin: 15px 0 40px 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -232,4 +233,10 @@ select {
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-top: 20px;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }

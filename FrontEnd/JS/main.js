@@ -319,6 +319,33 @@ function displayContentModal(worksToDisplay) {
 const form = document.querySelector(".addPhotoForm");
 const modalPhotos = document.querySelector(".modalPhotos");
 
+// IMG PREVIEW in MODAL
+function previewImage(event) {
+  // Get the selected file
+  const file = event.target.files[0];
+  // Check if a file is selected
+  if (!file) {
+    return;
+  }
+  const image = document.createElement("img");
+  image.classList.add("preview-image"); // Add a class for styling (optional)
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    image.src = e.target.result;
+  };
+  reader.readAsDataURL(event.target.files[0]);
+
+  // Assuming the icon-photo element exists within input-photo
+  const inputPhoto = document.querySelector(".input-photo");
+  // inputPhoto.innerHTML = ""; // Clear existing content (optional)
+  inputPhoto.appendChild(image);
+  const icon = (document.querySelector(".icon-photo").style.display = "none");
+  const fileUpload = (document.querySelector(
+    ".custom-file-upload"
+  ).style.display = "none");
+  const fileType = (document.querySelector(".fileType").style.display = "none");
+}
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
