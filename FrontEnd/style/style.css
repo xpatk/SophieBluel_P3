@@ -277,10 +277,13 @@ added code for the filters section and buttons
   padding: 30px 0 50px 0;
 }
 
+.filtres button {
+  margin-right: 15px;
+}
+
 .filtres button,
 .btnModal,
 .validate {
-  /* margin-right: 15px; */
   padding: 12px 20px;
   border-radius: 36px;
   background-color: white;
