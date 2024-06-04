@@ -341,6 +341,8 @@ form.addEventListener("submit", async (event) => {
       addPhotoToModal(newWork);
       form.reset();
       console.log("Photo uploaded successfully");
+      //CLOSE AFTER IMG ADDED
+      closeModal(new Event("submit"));
     } else {
       console.log(`Failed to upload image: ${response.status}`);
     }

@@ -43,6 +43,7 @@ MODAL
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -145,19 +146,13 @@ Add photo modal
 
 .input-photo {
   width: 100%;
-  height: 170px;
+  height: 230px;
   border-radius: 2px;
   background-color: rgb(223, 234, 241);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0 20px 0;
-}
-
-#title,
-#category {
-  width: 100%;
 }
 
 .fa-image {
@@ -181,22 +176,25 @@ Add photo modal
 }
 
 .input-group {
-  width: 100%;
   margin: 15px 0 40px 0;
+  box-sizing: content-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .input-field,
 select {
-  width: 100%;
+  width: 150px;
   padding: 10px;
   border-radius: 5px;
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-select {
-  appearance: none;
-  background-color: white;
+.bottomSection {
+  width: 80%;
 }
 
 .bottomModal {
@@ -215,4 +213,23 @@ select {
 
 .validate {
   width: 50%;
+}
+
+.inputText {
+  width: 94%;
+}
+
+#title,
+#category {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  text-align: left;
+  padding: 0 15px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 20px;
 }

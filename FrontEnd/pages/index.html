@@ -74,13 +74,16 @@
 								<label for="image" class="custom-file-upload">
 									+ Ajouter photo
 								</label>
-								<input type="file" id="image" name="image" accept="image/*" required>
+								<input type="file" id="image" name="image" accept="image/*"
+									onchange="previewImage(event)" required>
 								<br>
 								<div> .jpg .png : 4mo max</div>
 							</div>
 							<div class="input-group">
 								<label for="title">Titre:</label>
-								<input type="text" id="title" name="title" class="input-field" required>
+								<div class="inputText">
+									<input type="text" id="title" name="title" class="input-field" required>
+								</div>
 							</div>
 							<div class="input-group">
 								<label for="category">Catégorie:</label>
@@ -93,7 +96,7 @@
 							</div>
 						</form>
 					</section>
-					<section>
+					<section class="bottomSection">
 						<div class="bottomModal">
 							<hr>
 							<button class="btnModal">Ajouter une photo</button>
