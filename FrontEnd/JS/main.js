@@ -199,6 +199,16 @@ function populateCategoryOptions() {
   try {
     const categorySelect = document.getElementById("category");
     categorySelect.innerHTML = "";
+
+    // Add the placeholder option
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = "";
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    placeholderOption.hidden = true;
+    categorySelect.appendChild(placeholderOption);
+
     filters.forEach((category) => {
       const option = document.createElement("option");
       option.value = category.id;

@@ -24,9 +24,9 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<a href="./pagelogin.html">
-					<li class="link-login">login</li>
-				</a>
+				<li class="link-login">
+					<a href="./pagelogin.html">login</a>
+				</li>
 				<li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -60,7 +60,9 @@
 					<div class="go-back" style="display:none">
 						<i class="fa-solid fa-arrow-left fa-lg"></i>
 					</div>
-					<h1 class="titlemodal1"></h1>
+					<h1 class="titlemodal1">
+						<!-- JS -->
+					</h1>
 					<section class="modalPhotos">
 						<!-- Photos here -->
 					</section>
@@ -88,6 +90,7 @@
 							<div class="input-group">
 								<label for="category">Catégorie:</label>
 								<select id="category" name="category" class="input-field" required>
+									<option value="" disabled selected hidden>Category empty</option>
 								</select>
 							</div>
 							<hr>
