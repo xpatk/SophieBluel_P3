@@ -335,9 +335,7 @@ function previewImage(event) {
   };
   reader.readAsDataURL(event.target.files[0]);
 
-  // Assuming the icon-photo element exists within input-photo
   const inputPhoto = document.querySelector(".input-photo");
-  // inputPhoto.innerHTML = ""; // Clear existing content (optional)
   inputPhoto.appendChild(image);
   const icon = (document.querySelector(".icon-photo").style.display = "none");
   const fileUpload = (document.querySelector(
