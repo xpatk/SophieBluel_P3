@@ -154,6 +154,7 @@ Add photo modal
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .fa-image {
@@ -239,4 +240,8 @@ select {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

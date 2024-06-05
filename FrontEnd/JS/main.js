@@ -328,7 +328,7 @@ function previewImage(event) {
     return;
   }
   const image = document.createElement("img");
-  image.classList.add("preview-image"); // Add a class for styling (optional)
+  image.classList.add("preview-image");
   const reader = new FileReader();
   reader.onload = function (e) {
     image.src = e.target.result;
@@ -336,6 +336,7 @@ function previewImage(event) {
   reader.readAsDataURL(event.target.files[0]);
 
   const inputPhoto = document.querySelector(".input-photo");
+  inputPhoto.style.display = "flex";
   inputPhoto.appendChild(image);
   const icon = (document.querySelector(".icon-photo").style.display = "none");
   const fileUpload = (document.querySelector(
