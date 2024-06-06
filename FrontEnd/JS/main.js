@@ -200,7 +200,7 @@ function populateCategoryOptions() {
     const categorySelect = document.getElementById("category");
     categorySelect.innerHTML = "";
 
-    // Add the placeholder option
+    // First option - empty to match the model
     const placeholderOption = document.createElement("option");
     placeholderOption.value = "";
     placeholderOption.textContent = "";
@@ -237,6 +237,7 @@ const closeModal = function (event) {
   modal
     .querySelector(".js-stop-propagation")
     .removeEventListener("click", stopPropagation);
+  clearImagePreview();
   modal = null;
 };
 
@@ -456,3 +457,15 @@ arrowLeft.addEventListener("click", (e) => {
   displayContentModal(works);
   document.querySelector(".bottomModal").style.display = "flex";
 });
+
+function clearImagePreview() {
+  const inputPhoto = document.querySelector(".input-photo");
+  const previewImage = inputPhoto.querySelector(".preview-image");
+  if (previewImage) {
+    inputPhoto.removeChild(previewImage);
+  }
+  document.querySelector(".icon-photo").style.display = "block";
+  document.querySelector(".custom-file-upload").style.display = "block";
+  document.querySelector(".fileType").style.display = "block";
+  document.querySelector("form.addPhotoForm").reset();
+}
